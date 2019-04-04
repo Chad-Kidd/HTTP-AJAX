@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import axios from "axios"
 import { Route } from "react-router-dom";
 
-import FriendList from './components/FriendList'
-import Friend from './components/Friend'
+import FriendList from './components/FriendList';
+import Friend from './components/Friend';
 
 
 // import './App.css';
@@ -30,10 +30,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/friends" exact render={FriendList} />
-        <Route path="friends/:id" render={Friend} />
+      
+        <Route path="/" render={() => <FriendList friends={this.state.friends} />} />
+        {/* <Route path="/friends/:id" render={() => <Friend/>} /> */}
       </div>
     );
   }
 }
+
 export default App;
