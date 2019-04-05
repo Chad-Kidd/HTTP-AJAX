@@ -28,23 +28,43 @@ class App extends Component {
       .catch(error => console.log(`unable to load Data`));
   }
 
-    addFriend = info => {
+    addFriend = newInfo => {
       axios 
-      .get('http://localhost:5000/friends')
-      .then(result => {
-        this.setState({ friends: result.data, info });
+      .post('http://localhost:5000/friends', newInfo)
+      .then(response => {
+        console.log(this.setState);
+        this.setState({friends: response.data});
+        this.props.history.push('/friends');
+
       })
-      .catch(error => console.log(`unable to load Data`));
+      .catch(err => console.log(err));  
+  };
 
-    }
-
+  updateFriend = updatedFriend => {
+    axios
+      .put(`http://localhost:3333/items/${updatedFriend.id}`, updatedFriend)
+      .then(res => {
+        this.setState({ friends: res.data });
+        console.log(res);
+        // redirect
+        this.props.history.push("/friends");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   render() {
     return (
       <div className="App">
       
-        <Route path="/" render={() => <FriendList friends={this.state.friends} />} />
-        <FriendForm addFriend={this.addFriend}/>
+        <Route path="/" render={() => 
+        <FriendList friends={this.state.friends} />} />
+        
+        <Route path="/" 
+        render={props => 
+        <FriendForm {...props} 
+        addFriend={this.addFriend}/>} />
         {/* <Route path="/friends/:id" render={() => <Friend/>} /> */}
       </div>
     );
