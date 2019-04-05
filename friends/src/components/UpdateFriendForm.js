@@ -2,14 +2,10 @@ import React from "react";
 // import Friend from "./Friend"
 // import FriendList from "./FriendList"
 
-class FriendForm extends React.Component{
+class UpdateFriendForm extends React.Component{
   state = {
-      friends: {
-          name: "",
-          age: "",
-          email: ""
-        }
-    //need to add as props.age etc?
+      friends: this.props.activeFriend
+    //   prop passed down in app.js
       };
     //   this.handleChange = this.handleChange.bind(this)
    
@@ -17,11 +13,11 @@ class FriendForm extends React.Component{
     changeHandler = (event) => {
         console.log("is this thing on")
         event.persist();
-        // let value = event.target.value;
+        let value = event.target.value;
         this.setState(prevState => ({
           friends: {
               ...prevState.friends,
-            [event.target.name]: event.target.value,
+            [event.target.name]: value,
           }
         }));
       };
@@ -29,21 +25,12 @@ class FriendForm extends React.Component{
     handleSubmit = (event) => {
         console.log("what about this")
         event.preventDefault();
-        this.props.addFriend(this.state.friends);
-
-        this.setState ({
-            friends: {
-                name: "",
-                age: "",
-                email: ""
-              }
-        });
     };
 
     render() {
         return (
             <div>
-                <h2> ADD NEW FRIEND </h2>
+                <h2> UPDATE NEW FRIEND </h2>
             <form onSubmit={this.handleSubmit}>
                 <input 
                 type="text"
@@ -52,7 +39,6 @@ class FriendForm extends React.Component{
                 placeholder="name" 
                 value={this.state.friends.name} 
                 />
-
                 <input 
                 type="number"  
                 age="age"
@@ -60,7 +46,6 @@ class FriendForm extends React.Component{
                 placeholder="age" 
                 value={this.state.friends.age} 
                 />
-
                 <input 
                 type="text"
                 email="email"  
@@ -68,12 +53,11 @@ class FriendForm extends React.Component{
                 placeholder="email" 
                 value={this.state.friends.email} 
                 />
-
-                <button>Add New Friend</button>
+                <button>Update New Friend</button>
             </form>
             </div>
         )
     }
 }
 
-export default FriendForm;
+export default UpdateFriendForm;
