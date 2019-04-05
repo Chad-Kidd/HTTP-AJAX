@@ -3,14 +3,16 @@ import React from "react";
 // import FriendList from "./FriendList"
 
 class FriendForm extends React.Component{
-  state = {
-      friends: {
+    constructor(){
+        super();
+        this.state = {
+        friends: {
           name: "",
           age: "",
           email: ""
         }
     //need to add as props.age etc?
-      };
+      }};
     //   this.handleChange = this.handleChange.bind(this)
    
 
@@ -31,7 +33,7 @@ class FriendForm extends React.Component{
         event.preventDefault();
         this.props.addFriend(this.state.friends);
 
-        this.setState ({
+        this.setState({
             friends: {
                 name: "",
                 age: "",
@@ -52,23 +54,23 @@ class FriendForm extends React.Component{
                 placeholder="name" 
                 value={this.state.friends.name} 
                 />
-
+                <div/>
                 <input 
                 type="number"  
-                age="age"
+                name="age"
                 onChange={this.changeHandler} 
                 placeholder="age" 
                 value={this.state.friends.age} 
                 />
-
+               <div/>
                 <input 
                 type="text"
-                email="email"  
+                name="email"  
                 onChange={this.changeHandler} 
                 placeholder="email" 
                 value={this.state.friends.email} 
                 />
-
+                <div/>
                 <button>Add New Friend</button>
             </form>
             </div>
